@@ -1,7 +1,5 @@
 <?php
 require 'Filter.php';
-//Tecnica postback
-//se secondo accesso prendo i dati dal form
 
 $filter = new Filter();
 
