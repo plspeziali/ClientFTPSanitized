@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Upload file - Speziali Paolo 5BINF</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form enctype="multipart/form-data" name = "modulo_ftp" action="helper.php" method="post">
+              <table>
+                  <tr><td>Server FTP</td><td><input type="text" name="ftp_server" value="ftp_server" required/></td></tr>
+                  <tr><td>Porta</td><td><input type="number" name="port" value="21" required/></td></tr>
+                  <tr><td>Username</td><td><input type="text" name="username" value="username" required/></td></tr>
+                  <tr><td>Password</td><td><input type="password" name="password" value="password" required/></td></tr>
+                  <tr><td>File</td><td><input type="file" name="file" required/></td></tr>
+                  <tr><td><input type="submit" name="submit" value="Carica file"/></td>
+              </table> 
+        </form>
+    </body>
+</html>
