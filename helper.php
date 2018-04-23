@@ -4,13 +4,9 @@ require 'Filter.php';
 $filter = new Filter();
 
 $ftp_server = $filter->sanitize($_POST['ftp_server']);
-echo $ftp_server;
 $port = $filter->sanitize($_POST['port']);
-echo $port;
 $username = $filter->sanitize($_POST['username']);
-echo $username;
 $password = $filter->sanitize($_POST['password']);
-echo $password;
 
 //validazione dei parametri di connessione
 if (($ftp_server != 'ftp_server') && ($ftp_server != '')) {
