@@ -5,6 +5,10 @@
         <group name="PHP">
             <file>file:/home/monica/NetBeansProjects/OPENNESS/GestioneFile/index.php</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/home/paolo/NetBeansProjects/GestioneFileTPSIT/Filter.php</file>
+            <file>file:/home/paolo/NetBeansProjects/GestioneFileTPSIT/helper.php</file>
+            <file>file:/home/paolo/NetBeansProjects/GestioneFileTPSIT/ClientFTP.php</file>
+        </group>
     </open-files>
 </project-private>

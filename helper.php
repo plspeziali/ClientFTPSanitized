@@ -1,42 +1,26 @@
 <?php
-require 'Filter.php';
+require_once 'Filter.php';
+require_once 'ClientFTP.php';
 
 $filter = new Filter();
 
-$ftp_server = $filter->sanitize($_POST['ftp_server']);
-$port = $filter->sanitize($_POST['port']);
-$username = $filter->sanitize($_POST['username']);
-$password = $filter->sanitize($_POST['password']);
+$check = false;
 
-//validazione dei parametri di connessione
-if (($ftp_server != 'ftp_server') && ($ftp_server != '')) {
-    if (($username != 'username') && ($username != '')) {
-        if (($password != 'password') && ($password != '')) {
-            //validazione nome dei file
-            if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-                $file = $_FILES['file']['tmp_name']; //nome file con percorso assoluto
-                $new_file = $_FILES['file']['name']; //nome file senza percorso
+if(isset($_POST['ftp_server'])&&isset($_POST['port'])&&isset($_POST['username'])&&isset($_POST['password'])&&is_uploaded_file($_FILES['file']['tmp_name'])){
+    $ftp_server = $filter->sanitize($_POST['ftp_server']);
+    $port = $filter->sanitize($_POST['port']);
+    $username = $filter->sanitize($_POST['username']);
+    $password = $filter->sanitize($_POST['password']);
+    $loc_file = $_FILES['file']['tmp_name']; //nome file con percorso assoluto
+    $rem_file = $_FILES['file']['name']; //nome file senza percorso
+    $check = true;
+}
 
-                //apertura connessione ftp
-                $conn = ftp_connect($ftp_server, $port) or die ('Impossibile connettersi al server');
-                ftp_login($conn, $username, $password) or die ('username o password errati');
-                ftp_pasv($conn, true);
 
-                //upload del file
-                $invia = ftp_put($conn, $new_file, $file, FTP_BINARY);
-                echo (!$invia) ? 'Upload fallito' : 'Upload completato';
+$client = new ClientFTP($ftp_server, $port, $username, $password, $rem_file, $loc_file);
 
-                //chiusura connessione
-                ftp_close($conn);
-            } else {
-                echo "<b>Inserire il file</b>";
-            }
-        } else {
-            echo "<b>Inserire la password</b>";
-        }
-    } else {
-        echo "<b>Inserire lo username</b>";
-    }
-} else {
-    echo "<b>Inserire il server ftp</b>";
+if($check == true){
+    print($client->open());
+    print($client->send());
+    print($client->close());
 }
